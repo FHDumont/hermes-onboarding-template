@@ -1,18 +1,20 @@
-# Setup Verification & Missing Configurations
+# Setup Verification & Onboarding Flow
 
-Durante o onboarding, o agente deve **verificar** o estado atual antes de pedir qualquer configuração.
+Durante o onboarding, o agente deve seguir rigorosamente este fluxo.
 
-## Processo recomendado
+## Fluxo Obrigatório (não pular etapas)
 
-1. Executar comandos de verificação
-2. Identificar o que **já está configurado**
-3. Identificar o que **está faltando**
-4. Perguntar apenas sobre os itens faltantes
-5. Gerar resumo claro no final
-6. Popular os arquivos oficiais do Hermes usando os dados do repositório (ver seção abaixo)
+### 1. Localização do Projeto (Passo Obrigatório)
+- Caminho padrão: `~/Developer/Github/<nome-do-projeto>`
+- Perguntar ao usuário se deseja manter ou alterar o caminho
+- **Não continuar** enquanto o usuário não confirmar o caminho final
 
-## Comandos de verificação
+### 2. Nome do Agente (Passo Obrigatório)
+- Perguntar: "Qual nome você quer me dar?"
+- **Não continuar** enquanto o usuário não definir o nome do agente
 
+### 3. Verificação de Estado Atual
+Executar comandos de verificação:
 ```bash
 hermes config
 hermes tools list
@@ -20,70 +22,68 @@ hermes doctor
 hermes model
 ```
 
+Identificar o que já está configurado vs o que está faltando.
+
+### 4. Aplicar Dados do Onboarding (usando referências)
+
+Os arquivos deste repositório servem **apenas como referência**. O agente deve:
+
+- Ler `agent-persona.md` + `rules.md` → Atualizar `SOUL.md` (arquivo oficial)
+- Ler `user-profile.md` → Guardar via ferramenta `memory` (user profile)
+- Ler `multi-model-strategy.md` → Guardar preferências de modelo via memory
+- Ler `security.md` → Aplicar configurações de segurança (approvals.mode, redact_secrets)
+- Ler `toolsets.md` → Sugerir ativação dos toolsets recomendados
+
+**Regra importante:** Nunca criar arquivos USER.md ou MEMORY.md. Usar apenas os mecanismos oficiais do Hermes.
+
+### 5. Finalização do Onboarding
+
+O onboarding **só pode ser finalizado** quando:
+- Todos os passos obrigatórios (1 e 2) foram concluídos, **ou**
+- O usuário disser explicitamente "finalizar onboarding" ou "pode finalizar"
+
+**Antes de finalizar automaticamente**, o agente deve sempre verificar se existe alguma pendência (configurações de segurança, toolsets, provedores, etc.). Se houver pendências, elas devem ser apresentadas ao usuário antes de concluir.
+
+Ao finalizar, apresentar:
+
+**Resumo do que foi feito:**
+- Caminho do projeto definido
+- Nome do agente definido
+- SOUL.md atualizado
+- Dados de perfil salvos via memory
+- Configurações de segurança aplicadas (se aceitas)
+- Toolsets recomendados sugeridos
+
+**Mensagem de boas-vindas** personalizada.
+
 ## Itens que devem ser verificados
 
 ### Providers / Modelos
 - Grok (xAI)
 - Claude (Anthropic)
 - Ollama (local)
-- Hugging Face
-- Outros provedores configurados
+- Outros provedores
 
-**Pergunta padrão:**
-"Deseja configurar [provedor]?"
-
-Só perguntar se o provedor **não** estiver configurado.
+Só perguntar configuração se o provedor **não** estiver configurado.
 
 ### Segurança
-- `approvals.mode`
-- `security.redact_secrets`
-
-**Perguntas:**
-- Deseja configurar `approvals.mode`? (opções: manual, smart, off)
-- Deseja ativar redação automática de segredos?
+- `approvals.mode` (recomendado: smart)
+- `security.redact_secrets` (recomendado: true)
 
 ### Memory
-- Provider atual de memória
-- Se `user_profile_enabled` está ativo
+- Verificar se memory está ativo
 
 ### Toolsets
-- Quais toolsets estão habilitados vs desabilitados
+- Sugerir ativação dos toolsets listados em `toolsets.md`
 
-## Popular Arquivos Oficiais do Hermes (Passo Obrigatório)
+## Resumo esperado ao finalizar
 
-Após carregar o repositório, o agente deve popular os seguintes arquivos oficiais em `~/.hermes/`:
+**Configurado com sucesso:**
+- Localização do projeto
+- Nome do agente
+- Personalidade (SOUL.md)
+- Perfil do usuário (memory)
+- Estratégia multi-modelo
+- Recomendações de segurança
 
-### 1. `SOUL.md`
-- Conteúdo: Personalidade, tom e regras de comportamento do agente
-- Fonte principal: `agent-persona.md` + `rules.md`
-
-### 2. `USER.md`
-- Conteúdo: Informações do usuário (nome, cargo, preferências, destaques)
-- Fonte principal: `user-profile.md`
-
-### 3. `MEMORY.md`
-- Conteúdo: Fatos importantes que devem persistir (incluindo entendimento do projeto de onboarding)
-- Fontes: `user-profile.md` + `multi-model-strategy.md` + fatos sobre o projeto
-
-**Regra:**
-- Os arquivos do repositório servem apenas como **fonte de dados**.
-- O agente deve escrever nos arquivos oficiais (`SOUL.md`, `USER.md`, `MEMORY.md`).
-
-## Regra importante
-
-Nunca assumir que algo já está configurado.  
-Sempre verificar primeiro e só solicitar configuração do que realmente estiver ausente.
-
-## Resumo esperado
-
-No final da verificação, o agente deve apresentar algo como:
-
-**Configurado:**
-- Grok
-- Memory (built-in)
-- Toolsets principais
-
-**Faltando configurar:**
-- Claude → pedir API key
-- Ollama → confirmar se está rodando + modelo
-- Segurança (`approvals.mode` e `redact_secrets`)
+**Boas-vindas:** "Bem-vindo de volta, Fernando. Seu Hermes está configurado e pronto para trabalhar com você."
