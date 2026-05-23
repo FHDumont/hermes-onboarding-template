@@ -11,7 +11,7 @@ Este repositório contém dados pré-configurados para fazer onboarding rápido 
 
 ## Estrutura
 
-- `user-profile.md` → Perfil completo do usuário + contexto + regras de comunicação
+- `user-profile.md` → Informações do usuário (nome, cargo, experiência, contato, destaques)
 - `toolsets.md` → Toolsets recomendados
 - `skills.md` → Skills a instalar
 - `config-snippets/` → Configurações de exemplo
