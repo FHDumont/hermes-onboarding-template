@@ -15,9 +15,20 @@ Este repositório contém dados de referência para fazer onboarding rápido e p
 O onboarding **só avança** quando as etapas abaixo forem concluídas.
 
 ### Passo 1 - Localização do Projeto (Obrigatório)
-- Caminho padrão: `~/Developer/Github/hermes-onboarding-template`
+
+O repositório deve ficar no **home real do usuário**, nunca dentro da estrutura do Hermes (`~/.hermes`).
+
+**Caminho padrão recomendado:**
+
+- **macOS:** `~/Developer/GitHub/hermes-onboarding-template`
+- **Linux:** `~/Developer/GitHub/hermes-onboarding-template`
+
+**Regras importantes:**
+- O caminho deve ser resolvido para o diretório real do usuário (ex: `/Users/seuusuario/Developer/GitHub/...`)
+- **Nunca** deixar o repositório dentro de `~/.hermes/profiles/...`
 - Dar opção clara de manter ou alterar o caminho
-- **Não continuar** enquanto o usuário não confirmar o caminho
+- **Não continuar** enquanto o usuário não confirmar o caminho final
+- Após definir o caminho, mostrar o caminho **absoluto** completo para confirmação
 
 ### Passo 2 - Nome do Agente (Obrigatório)
 - Perguntar: "Qual nome você quer me dar?"
