@@ -9,7 +9,7 @@ Durante o onboarding, o agente deve **verificar** o estado atual antes de pedir 
 3. Identificar o que **está faltando**
 4. Perguntar apenas sobre os itens faltantes
 5. Gerar resumo claro no final
-6. Ler o README do projeto e salvar entendimento na memória (ver seção abaixo)
+6. Popular os arquivos oficiais do Hermes usando os dados do repositório (ver seção abaixo)
 
 ## Comandos de verificação
 
@@ -49,22 +49,25 @@ Só perguntar se o provedor **não** estiver configurado.
 ### Toolsets
 - Quais toolsets estão habilitados vs desabilitados
 
-## Salvar Entendimento do Projeto na Memória (Passo Obrigatório)
+## Popular Arquivos Oficiais do Hermes (Passo Obrigatório)
 
-Após carregar o repositório, o agente **deve**:
+Após carregar o repositório, o agente deve popular os seguintes arquivos oficiais em `~/.hermes/`:
 
-1. Ler o arquivo `README.md`
-2. Entender o propósito e a estrutura do projeto
-3. Salvar fatos importantes na memória persistente
+### 1. `SOUL.md`
+- Conteúdo: Personalidade, tom e regras de comportamento do agente
+- Fonte principal: `agent-persona.md` + `rules.md`
 
-Fatos que devem ser salvos:
-- Este é o projeto de onboarding do Hermes Agent (`hermes-onboarding-template`)
-- Local do repositório: `~/Documents/GitHub/hermes-onboarding-template`
-- Finalidade: permitir onboarding rápido e consistente em novas instalações do Hermes
-- Quando o usuário pedir "atualizar o projeto com os dados atuais", o agente deve ler os arquivos do repo e atualizar com informações da sessão atual
-- O projeto contém arquivos que definem perfil do usuário, regras do agente, estratégias de modelo, segurança, etc.
+### 2. `USER.md`
+- Conteúdo: Informações do usuário (nome, cargo, preferências, destaques)
+- Fonte principal: `user-profile.md`
 
-Isso garante que em sessões futuras o agente já saiba exatamente o que fazer quando o usuário solicitar atualizações ou melhorias no projeto.
+### 3. `MEMORY.md`
+- Conteúdo: Fatos importantes que devem persistir (incluindo entendimento do projeto de onboarding)
+- Fontes: `user-profile.md` + `multi-model-strategy.md` + fatos sobre o projeto
+
+**Regra:**
+- Os arquivos do repositório servem apenas como **fonte de dados**.
+- O agente deve escrever nos arquivos oficiais (`SOUL.md`, `USER.md`, `MEMORY.md`).
 
 ## Regra importante
 
