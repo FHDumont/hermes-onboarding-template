@@ -59,12 +59,9 @@ Ao finalizar, apresentar:
 ## Itens que devem ser verificados
 
 ### Providers / Modelos
-- Grok (xAI)
-- Claude (Anthropic)
-- Ollama (local)
-- Outros provedores
+Consultar o arquivo `multi-model-strategy.md` (fonte única de verdade).
 
-Só perguntar configuração se o provedor **não** estiver configurado.
+Verificar status atual e perguntar sobre configuração dos que estiverem pendentes, até o usuário dizer para parar.
 
 ### Segurança
 - `approvals.mode` (recomendado: smart)

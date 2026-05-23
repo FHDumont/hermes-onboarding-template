@@ -5,51 +5,61 @@ Este repositório contém dados de referência para fazer onboarding rápido e p
 ## Regras Importantes do Onboarding
 
 - Os arquivos deste repositório são **apenas referência**.
-- O agente deve ler os arquivos, extrair as informações e guardar usando os mecanismos oficiais do Hermes (principalmente a ferramenta de memory + SOUL.md para personalidade).
-- **Não criar** USER.md nem MEMORY.md (não fazem parte da estrutura oficial).
-- SOUL.md **é oficial** e pode ser atualizado com base nos dados de persona + rules.
-
-## Como usar
-
-1. Clone o repositório
-2. Diga para o Hermes: "fazer onboarding conforme repo ~/Developer/Github/hermes-onboarding-template"
-3. O agente seguirá o fluxo obrigatório abaixo.
+- O agente deve ler os arquivos, extrair as informações e guardar usando os mecanismos oficiais do Hermes (`memory` + `SOUL.md`).
+- **Nunca criar** USER.md nem MEMORY.md.
+- SOUL.md é o arquivo oficial de personalidade.
+- Os dados do repositório servem apenas para o agente saber quem ele é, quem você é e quais configurações aplicar.
 
 ## Fluxo Obrigatório do Onboarding
 
-O onboarding **só avança** se as seguintes etapas forem concluídas:
+O onboarding **só avança** quando as etapas abaixo forem concluídas.
 
-### Passo 1 - Localização do Projeto
-- Perguntar o caminho padrão: `~/Developer/Github/<nome-do-projeto>`
-- Dar opção de manter ou alterar o caminho
+### Passo 1 - Localização do Projeto (Obrigatório)
+- Caminho padrão: `~/Developer/Github/hermes-onboarding-template`
+- Dar opção clara de manter ou alterar o caminho
 - **Não continuar** enquanto o usuário não confirmar o caminho
 
-### Passo 2 - Nome do Agente
+### Passo 2 - Nome do Agente (Obrigatório)
 - Perguntar: "Qual nome você quer me dar?"
 - **Não continuar** enquanto o usuário não definir o nome
 
 ### Passo 3 - Aplicar Configurações
 - Ler os arquivos de referência
-- Atualizar SOUL.md com persona + regras
-- Salvar dados de perfil e preferências via memory tool
+- Atualizar `SOUL.md` com persona + regras
+- Salvar dados de perfil e preferências via `memory`
 - Aplicar recomendações de segurança e toolsets
+- Verificar e configurar provedores de modelo (multi-model strategy)
 
 ### Finalização
-- O onboarding só pode ser finalizado quando todos os passos obrigatórios forem concluídos **ou** o usuário disser explicitamente para finalizar.
-- Ao finalizar, mostrar:
-  - Resumo do que foi configurado
-  - Mensagem de boas-vindas
+O onboarding **só pode ser finalizado** quando:
+- Todos os passos recomendados forem concluídos, **ou**
+- O usuário disser explicitamente "finalizar onboarding"
+
+Ao finalizar, mostrar:
+- Resumo do que foi configurado (usar tabela de status)
+- Mensagem de boas-vindas personalizada
 
 ## Estrutura do Repositório
 
-- `user-profile.md` → Referência para dados do usuário (guardar via memory)
+- `user-profile.md` → Referência para dados do usuário
 - `agent-persona.md` + `rules.md` → Referência para SOUL.md
-- `multi-model-strategy.md` → Preferências de modelo
+- `multi-model-strategy.md` → Preferências de modelo (obrigatório verificar)
 - `security.md` → Recomendações de segurança
-- `setup-verification.md` → Fluxo detalhado de verificação
 - `toolsets.md` → Toolsets recomendados
 - `skills.md` → Skills sugeridas
-- `config-snippets/` → Exemplos de configuração
+- `setup-verification.md` → Fluxo detalhado de verificação
+
+## Exemplo de Tabela de Pendências
+
+Usar sempre este formato enquanto houver itens pendentes:
+
+| Provedor       | Status             | Observação                          |
+|----------------|--------------------|-------------------------------------|
+| Grok (xAI)     | ✅ Configurado     | Modelo atual                        |
+| Claude         | ❌ Não configurado | Anthropic API key ausente           |
+| OpenRouter     | ❌ Não configurado | -                                   |
+| Ollama         | ❌ Não configurado | Precisa instalar + configurar       |
+| AWS Bedrock    | ✅ Parcial         | Funciona via IAM role               |
 
 ## Observação
 
